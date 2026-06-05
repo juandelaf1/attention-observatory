@@ -1,0 +1,23 @@
+# Environment
+.env
+*.env
+
+# Large data artifacts (keep reports, exclude parquets)
+data/bronze/
+data/silver/
+data/gold/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# IDE
+.vscode/
+.idea/

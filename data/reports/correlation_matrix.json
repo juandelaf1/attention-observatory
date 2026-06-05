@@ -1,0 +1,134 @@
+{
+  "pearson": {
+    "er_mean__er_mean": {
+      "r": 1.0,
+      "p": 0.0
+    },
+    "er_mean__ppi_mean": {
+      "r": -0.1367,
+      "p": 1.0554757425981015e-18
+    },
+    "er_mean__sentiment_avg": {
+      "r": -0.0091,
+      "p": 0.5571273975477784
+    },
+    "er_mean__afi_mean": {
+      "r": 0.1028,
+      "p": 3.4212979024498736e-11
+    },
+    "ppi_mean__er_mean": {
+      "r": -0.1367,
+      "p": 1.0554757425981015e-18
+    },
+    "ppi_mean__ppi_mean": {
+      "r": 1.0,
+      "p": 0.0
+    },
+    "ppi_mean__sentiment_avg": {
+      "r": 0.0834,
+      "p": 7.88116609524431e-08
+    },
+    "ppi_mean__afi_mean": {
+      "r": -0.2862,
+      "p": 7.832835498521041e-79
+    },
+    "sentiment_avg__er_mean": {
+      "r": -0.0091,
+      "p": 0.5571273975477784
+    },
+    "sentiment_avg__ppi_mean": {
+      "r": 0.0834,
+      "p": 7.88116609524431e-08
+    },
+    "sentiment_avg__sentiment_avg": {
+      "r": 1.0,
+      "p": 0.0
+    },
+    "sentiment_avg__afi_mean": {
+      "r": -0.0156,
+      "p": 0.3167218914261716
+    },
+    "afi_mean__er_mean": {
+      "r": 0.1028,
+      "p": 3.4212979024498736e-11
+    },
+    "afi_mean__ppi_mean": {
+      "r": -0.2862,
+      "p": 7.832835498521041e-79
+    },
+    "afi_mean__sentiment_avg": {
+      "r": -0.0156,
+      "p": 0.3167218914261716
+    },
+    "afi_mean__afi_mean": {
+      "r": 1.0,
+      "p": 0.0
+    }
+  },
+  "spearman": {
+    "er_mean__er_mean": {
+      "rho": 1.0,
+      "p": 0.0
+    },
+    "er_mean__ppi_mean": {
+      "rho": -0.3554,
+      "p": 2.0530692031119135e-123
+    },
+    "er_mean__sentiment_avg": {
+      "rho": -0.0239,
+      "p": 0.12438202499729427
+    },
+    "er_mean__afi_mean": {
+      "rho": 0.2573,
+      "p": 1.5406337134920664e-63
+    },
+    "ppi_mean__er_mean": {
+      "rho": -0.3554,
+      "p": 2.0530692031119135e-123
+    },
+    "ppi_mean__ppi_mean": {
+      "rho": 1.0,
+      "p": 0.0
+    },
+    "ppi_mean__sentiment_avg": {
+      "rho": 0.0643,
+      "p": 3.506255069075737e-05
+    },
+    "ppi_mean__afi_mean": {
+      "rho": -0.2847,
+      "p": 5.638770512642781e-78
+    },
+    "sentiment_avg__er_mean": {
+      "rho": -0.0239,
+      "p": 0.12438202499729427
+    },
+    "sentiment_avg__ppi_mean": {
+      "rho": 0.0643,
+      "p": 3.506255069075747e-05
+    },
+    "sentiment_avg__sentiment_avg": {
+      "rho": 1.0,
+      "p": 0.0
+    },
+    "sentiment_avg__afi_mean": {
+      "rho": -0.0184,
+      "p": 0.23714072143802067
+    },
+    "afi_mean__er_mean": {
+      "rho": 0.2573,
+      "p": 1.5406337134920664e-63
+    },
+    "afi_mean__ppi_mean": {
+      "rho": -0.2847,
+      "p": 5.638770512642781e-78
+    },
+    "afi_mean__sentiment_avg": {
+      "rho": -0.0184,
+      "p": 0.23714072143802076
+    },
+    "afi_mean__afi_mean": {
+      "rho": 1.0,
+      "p": 0.0
+    }
+  }
+}

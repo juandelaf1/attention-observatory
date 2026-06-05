@@ -1,0 +1,7 @@
+{
+  "n_total": 4136,
+  "hf_n": 3000,
+  "hf_pct": 72.5,
+  "gini_with_hf": 0.9828,
+  "gini_without_hf": 0.9372
+}
