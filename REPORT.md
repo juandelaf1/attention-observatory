@@ -172,6 +172,71 @@ HuggingFace infla N artificialmente pero no contribuye señal a ER/PPI. Al elimi
 
 ---
 
+---
+
+## Resultados de Investigación (Sprint 2 — 6 Jun 2026)
+
+### P1: ¿La atención sigue power law en todas las plataformas?
+
+| Plataforma | N | Con ER>0 | α | Pareto? |
+|-----------|---|----------|---|---------|
+| HackerNews | 295 | 34 | **2.69** | ✅ Sí |
+| Bluesky | 392 | 155 | **2.29** | ✅ Sí |
+| Mastodon | 129 | 64 | 1.56 | ❌ No |
+| GitHub | 52 | 2 | N/A | Insuficiente |
+| Wikipedia | 268 | 0 | N/A | Sin ER |
+| HuggingFace | 3000 | 0 | N/A | Sin ER |
+
+**Conclusión**: Power Law confirmada para HackerNews y Bluesky (α>2.0). Mastodon muestra una distribución diferente (α<2.0), posiblemente por ser una red más distribuida y menos jerárquica.
+
+### P2: ¿Hay correlación entre sentiment y engagement?
+
+| Test | Valor | p-valor |
+|------|-------|---------|
+| Pearson r | 0.038 | 0.198 |
+| **Spearman ρ** | **0.045** | **0.130** |
+
+**Conclusión**: **No hay correlación**. El tono emocional del contenido no predice el engagement. Consistente con la hipótesis de Inviabilidad §II: el engagement está determinado por la arquitectura de la red, no por el contenido.
+
+### P3: ¿Qué actores tienen más leverage?
+
+8 nodos de alto apalancamiento detectados (todos en Bluesky, influenciados por floor de followers). Requiere refinamiento de ER para plataformas con pocos seguidores.
+
+### P4: ¿El prestigio (AFI) está inversamente correlacionado con producción (PPI)?
+
+| Test | Valor | p-valor |
+|------|-------|---------|
+| Spearman ρ | **-0.088** | **0.003** |
+
+**Conclusión**: Correlación negativa **débil pero estadísticamente significativa**. A mayor producción (PPI), menor uso de lenguaje de prestigio (AFI). Consistente con la dirección esperada por Inviabilidad §III-A.
+
+### P5: ¿Hay diferencias entre plataformas en desigualdad?
+
+| Plataforma | Gini | IC 95% |
+|-----------|------|--------|
+| Mastodon | **0.968** | [0.884, 0.976] |
+| GitHub | **0.962** | [0.000, 0.981] |
+| HackerNews | **0.903** | [0.870, 0.933] |
+| Bluesky | **0.869** | [0.799, 0.909] |
+| Wikipedia | 0.000 | Sin ER |
+| HuggingFace | 0.000 | Sin ER |
+
+**Conclusión**: Todas las plataformas con datos de engagement muestran Gini > 0.85 — concentración extrema en todas. Mastodon es la más desigual; Bluesky la "menos" desigual (pero aún extrema).
+
+### P6: ¿Los super-hubs tienen perfiles distintos?
+
+7 super-hubs detectados (Z>3), todos en Bluesky. Perfil medio:
+- ER medio: 4,486
+- PPI medio: 0.19 (baja presión de producción)
+- Sentiment medio: -0.16 (ligeramente negativo)
+- AFI medio: 0.20 (alta densidad de prestigio)
+
+**Conclusión**: Los super-hubs de Bluesky tienen baja frecuencia de publicación (PPI bajo) pero alto contenido de prestigio (AFI alto) — consistente con la mutación de capital cuantitativo a cualitativo descrita en Inviabilidad §III-A.
+
+> **Nota**: Los super-hubs están dominados por Bluesky debido al floor de followers=1 que infla ER. HackerNews y Mastodon tienen actores con ER real pero no alcanzan Z>3. Refinamiento pendiente.
+
+---
+
 ## Dashboard Streamlit
 
 Organizado en 4 vistas:

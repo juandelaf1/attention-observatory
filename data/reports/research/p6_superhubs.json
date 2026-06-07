@@ -1,0 +1,62 @@
+{
+  "z_threshold": 1392.2264,
+  "n_hubs": 7,
+  "mean_vector": {
+    "er": 4485.7143,
+    "ppi": 0.1946,
+    "sentiment": -0.162,
+    "afi": 0.2042
+  },
+  "by_platform": {
+    "platform": [
+      "bluesky"
+    ],
+    "n": [
+      7
+    ]
+  },
+  "top_hubs": [
+    {
+      "username": "freya.bsky.social",
+      "platform": "bluesky",
+      "er": 11600.0,
+      "ppi": 0.19
+    },
+    {
+      "username": "popbase.tv",
+      "platform": "bluesky",
+      "er": 6500.0,
+      "ppi": 0.19
+    },
+    {
+      "username": "jwlicinio.bsky.social",
+      "platform": "bluesky",
+      "er": 4900.0,
+      "ppi": 0.19
+    },
+    {
+      "username": "mickeykuhns.bsky.social",
+      "platform": "bluesky",
+      "er": 2500.0,
+      "ppi": 0.19
+    },
+    {
+      "username": "michaelemann.bsky.social",
+      "platform": "bluesky",
+      "er": 2400.0,
+      "ppi": 0.19
+    },
+    {
+      "username": "jackiantonovich.bsky.social",
+      "platform": "bluesky",
+      "er": 2100.0,
+      "ppi": 0.19
+    },
+    {
+      "username": "ketanjoshi.co",
+      "platform": "bluesky",
+      "er": 1400.0,
+      "ppi": 0.19
+    }
+  ]
+}

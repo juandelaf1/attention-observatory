@@ -1,0 +1,38 @@
+{
+  "hackernews": {
+    "n": 295,
+    "n_with_er": 34,
+    "alpha": 2.6946,
+    "sigma": 0.2996,
+    "pareto": true
+  },
+  "bluesky": {
+    "n": 392,
+    "n_with_er": 155,
+    "alpha": 2.2911,
+    "sigma": 0.2319,
+    "pareto": true
+  },
+  "github": {
+    "n": 52,
+    "n_with_er": 2,
+    "alpha": null
+  },
+  "mastodon": {
+    "n": 129,
+    "n_with_er": 64,
+    "alpha": 1.5644,
+    "sigma": 0.1152,
+    "pareto": false
+  },
+  "huggingface": {
+    "n": 3000,
+    "n_with_er": 0,
+    "alpha": null
+  },
+  "wikipedia": {
+    "n": 268,
+    "n_with_er": 0,
+    "alpha": null
+  }
+}

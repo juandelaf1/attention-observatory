@@ -1,0 +1,63 @@
+{
+  "n_total": 1136,
+  "threshold": 0.003521,
+  "n_high_leverage": 8,
+  "top_nodes": [
+    {
+      "actor_id": "BSKY_did:plc:5nq3pybl4nnoxfp3ovjy2lh7",
+      "username": "freya.bsky.social",
+      "platform": "bluesky",
+      "er": 11600.0,
+      "ppi": 0.1946
+    },
+    {
+      "actor_id": "BSKY_did:plc:xlqcxpk53spbhlypj6wmvvke",
+      "username": "popbase.tv",
+      "platform": "bluesky",
+      "er": 6500.0,
+      "ppi": 0.1946
+    },
+    {
+      "actor_id": "BSKY_did:plc:fkilkf4oovwuvw2dwgwcpldl",
+      "username": "jwlicinio.bsky.social",
+      "platform": "bluesky",
+      "er": 4900.0,
+      "ppi": 0.1946
+    },
+    {
+      "actor_id": "BSKY_did:plc:krddjq56g2tupaku6yp7jmec",
+      "username": "mickeykuhns.bsky.social",
+      "platform": "bluesky",
+      "er": 2500.0,
+      "ppi": 0.1946
+    },
+    {
+      "actor_id": "BSKY_did:plc:mpoxsaax7r5rs2tgeh56nqhn",
+      "username": "michaelemann.bsky.social",
+      "platform": "bluesky",
+      "er": 2400.0,
+      "ppi": 0.1946
+    },
+    {
+      "actor_id": "BSKY_did:plc:3wawjzhuuhb6cfks645m3t25",
+      "username": "jackiantonovich.bsky.social",
+      "platform": "bluesky",
+      "er": 2100.0,
+      "ppi": 0.1946
+    },
+    {
+      "actor_id": "BSKY_did:plc:66lbtw2porscqpmair6mir37",
+      "username": "ketanjoshi.co",
+      "platform": "bluesky",
+      "er": 1400.0,
+      "ppi": 0.1946
+    },
+    {
+      "actor_id": "BSKY_did:plc:x7irsqqhp64woalar7obnnft",
+      "username": "standupforscience.net",
+      "platform": "bluesky",
+      "er": 1200.0,
+      "ppi": 0.1946
+    }
+  ]
+}
