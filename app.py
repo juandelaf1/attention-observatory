@@ -129,7 +129,10 @@ def main():
     filtered = df.filter(mask)
     fpd = filtered.to_pandas()
 
-    tabs = st.tabs(["Overview", "Inequality", "Research", "State Space", "Actors"])
+    from src.analysis.longitudinal import load_snapshots, summary_table
+    snaps = load_snapshots()
+
+    tabs = st.tabs(["Overview", "Inequality", "Research", "Longitudinal", "State Space", "Actors"])
 
     # ── TAB 1: Overview ──
     with tabs[0]:
@@ -221,8 +224,48 @@ def main():
                         column_config={"ER": st.column_config.NumberColumn(format="%.1f"), "PPI": st.column_config.NumberColumn(format="%.2f")},
                         use_container_width=True, hide_index=True)
 
-    # ── TAB 4: State Space ──
+    # ── TAB 4: Longitudinal ──
     with tabs[3]:
+        st.header("Longitudinal Analysis")
+        if len(snaps) < 2:
+            st.info("Need at least 2 execution snapshots for longitudinal tracking. Run `python main.py` multiple times.")
+            if snaps:
+                st.json(snaps[-1])
+        else:
+            df_snaps = pd.DataFrame(summary_table(snaps))
+            df_snaps["exec"] = range(1, len(df_snaps) + 1)
+            st.dataframe(df_snaps, use_container_width=True, hide_index=True)
+
+            c1, c2 = st.columns(2)
+            with c1:
+                fig = px.line(df_snaps, x="exec", y="gini", markers=True, title="Gini Over Time",
+                             labels={"exec": "Execution", "gini": "Gini"}, text="gini")
+                fig.update_traces(texttemplate="%{text:.4f}", textposition="top center")
+                fig.update_layout(plot_bgcolor=BG, margin=dict(l=40,r=20,t=50,b=40))
+                st.plotly_chart(fig, use_container_width=True)
+            with c2:
+                fig = px.line(df_snaps, x="exec", y="alpha", markers=True, title="Power Law Alpha Over Time",
+                             labels={"exec": "Execution", "alpha": "Alpha"}, text="alpha")
+                fig.update_traces(texttemplate="%{text:.3f}", textposition="top center")
+                fig.update_layout(plot_bgcolor=BG, margin=dict(l=40,r=20,t=50,b=40))
+                st.plotly_chart(fig, use_container_width=True)
+
+            c1, c2 = st.columns(2)
+            with c1:
+                fig = px.line(df_snaps, x="exec", y="super_hubs", markers=True, title="Super-Hubs Over Time",
+                             labels={"exec": "Execution", "super_hubs": "Super-Hubs"}, text="super_hubs")
+                fig.update_traces(textposition="top center")
+                fig.update_layout(plot_bgcolor=BG, margin=dict(l=40,r=20,t=50,b=40))
+                st.plotly_chart(fig, use_container_width=True)
+            with c2:
+                fig = px.line(df_snaps, x="exec", y="actors", markers=True, title="Actors Over Time",
+                             labels={"exec": "Execution", "actors": "Actors"}, text="actors")
+                fig.update_traces(textposition="top center")
+                fig.update_layout(plot_bgcolor=BG, margin=dict(l=40,r=20,t=50,b=40))
+                st.plotly_chart(fig, use_container_width=True)
+
+    # ── TAB 5: State Space ──
+    with tabs[4]:
         st.header("State Space")
         fig3d = px.scatter_3d(fpd, x="er_mean", y="ppi_mean", z="sentiment_avg",
                               color="platform" if "platform" in fpd.columns else None,
@@ -241,8 +284,8 @@ def main():
                 hfig.update_layout(plot_bgcolor=BG, margin=dict(l=40,r=20,t=50,b=40))
                 st.plotly_chart(hfig, use_container_width=True)
 
-    # ── TAB 5: Actors ──
-    with tabs[4]:
+    # ── TAB 6: Actors ──
+    with tabs[5]:
         st.header("Actor Explorer")
         actor_ids = filtered["actor_id"].to_list()
         selected = st.selectbox("Select Actor", actor_ids)

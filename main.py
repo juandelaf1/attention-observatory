@@ -1,6 +1,7 @@
 import argparse
 import sys
 import os
+import polars as pl
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
@@ -295,8 +296,6 @@ def run_elt(force_simulator: bool = False):
 
 
 def run_stats(gold_path: str):
-    import polars as pl
-
     if not os.path.exists(gold_path):
         print(f"[main] Gold not found at {gold_path}")
         return
@@ -335,7 +334,20 @@ def main():
     else:
         gold_path = run_elt(force_simulator=args.simulate)
 
-    run_stats(gold_path)
+    result = run_stats(gold_path)
+    if result:
+        ineq, anomaly, breakdown, gold = result
+        platforms = gold.group_by("platform").agg(pl.len().alias("n")).to_dict(as_series=False)
+        plat_dict = dict(zip(platforms["platform"], platforms["n"]))
+        from src.analysis.longitudinal import record_snapshot
+        record_snapshot(
+            gini=ineq.gini, alpha=ineq.powerlaw_alpha, sigma=ineq.powerlaw_sigma,
+            n_super_hubs=anomaly.n_super_hubs, super_hub_share=anomaly.super_hub_attention_share,
+            n_high_leverage=len(anomaly.high_leverage_nodes), churn=breakdown.churn_acceleration_mean,
+            saturation=breakdown.systemic_saturation, n_actors=len(gold),
+            n_posts=int(gold["post_count"].sum()), n_platforms=gold["platform"].n_unique(),
+            platforms=plat_dict,
+        )
 
     if args.dashboard:
         print("\n[main] Launching dashboard...")
