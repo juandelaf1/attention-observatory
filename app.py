@@ -10,6 +10,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 from src.stats.inequality import compute_inequality, compute_anomalies, compute_breakdown, _lorenz, _cooks_distance
+from src.stats.network import compute_network_metrics, compute_cross_platform_report
 
 st.set_page_config(page_title="Attention Observatory", page_icon="", layout="wide")
 
@@ -132,7 +133,7 @@ def main():
     from src.analysis.longitudinal import load_snapshots, summary_table
     snaps = load_snapshots()
 
-    tabs = st.tabs(["Overview", "Inequality", "Research", "Longitudinal", "State Space", "Actors"])
+    tabs = st.tabs(["Overview", "Inequality", "Research", "Longitudinal", "State Space", "Actors", "Network"])
 
     # ── TAB 1: Overview ──
     with tabs[0]:
@@ -306,6 +307,47 @@ def main():
 
         st.markdown("---")
         st.plotly_chart(top_actors(filtered, 30), use_container_width=True)
+
+    # ── TAB 7: Network ──
+    with tabs[6]:
+        st.header("Ecosystem Network")
+        net = compute_network_metrics(filtered)
+        cp = compute_cross_platform_report(filtered)
+
+        if net.n_nodes == 0:
+            st.info("Not enough data to build a network graph (minimum 3 nodes required).")
+        else:
+            c1, c2, c3 = st.columns(3)
+            c1.metric("Nodes (Actors)", net.n_nodes)
+            c2.metric("Edges (Connections)", net.n_edges)
+            c3.metric("Network Density", f"{net.density:.5f}")
+
+            c1, c2, c3 = st.columns(3)
+            c1.metric("Avg Degree", f"{net.avg_degree:.2f}")
+            c2.metric("Clustering Coeff", f"{net.clustering_coefficient:.4f}")
+            c3.metric("Modularity", f"{net.modularity:.4f}")
+
+            c1, c2, c3 = st.columns(3)
+            c1.metric("Communities", net.n_communities)
+            c2.metric("Assortativity", f"{net.degree_assortativity:.4f}")
+            c3.metric("Centralization", f"{net.centralization:.4f}")
+
+            st.subheader("Top 10 Most Connected Nodes")
+            if net.top_degree:
+                deg_df = pd.DataFrame(net.top_degree, columns=["actor_id", "degree"])
+                st.dataframe(deg_df, use_container_width=True, hide_index=True)
+
+            st.subheader("Cross-Platform Bridges")
+            st.metric("Total Bridges", cp["total_bridges"])
+            if cp["top_pairs"]:
+                pairs_df = pd.DataFrame(cp["top_pairs"])
+                st.dataframe(pairs_df, use_container_width=True, hide_index=True)
+
+            if cp["top_bridges"]:
+                st.subheader("Top Inter-Platform Connections")
+                bridges_df = pd.DataFrame(cp["top_bridges"])
+                bridges_df["similarity"] = bridges_df["similarity"].round(4)
+                st.dataframe(bridges_df, use_container_width=True, hide_index=True)
 
     st.markdown("---")
     st.caption("Attention Observatory — Empirical model of digital attention distribution.")

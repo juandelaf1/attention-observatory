@@ -29,20 +29,22 @@ def _try_youtube_ingest(bronze_dir: str) -> tuple[list[str], list[str]]:
     try:
         from src.ingesta.youtube import ingest_channel_feed, save_bronze
 
-        query = os.environ.get("YOUTUBE_SEARCH_QUERY", "digital creator")
+        queries_str = os.environ.get("YOUTUBE_QUERIES",
+            "digital creator,artificial intelligence,machine learning,data science,technology news,programming,startup,science")
+        queries = [q.strip() for q in queries_str.split(",") if q.strip()]
         max_channels = int(os.environ.get("YOUTUBE_MAX_CHANNELS", "5"))
-        max_vids = int(os.environ.get("YOUTUBE_MAX_VIDEOS", "20"))
+        max_vids = int(os.environ.get("YOUTUBE_MAX_VIDEOS", "25"))
 
-        print(f"[main] YouTube ingest: query='{query}', channels={max_channels}")
-        actors, posts = ingest_channel_feed(query, max_channels=max_channels, max_videos_per_channel=max_vids)
-
-        if len(actors) > 0:
-            a_path, p_path = save_bronze(actors, posts, bronze_dir)
-            actors_paths.append(a_path)
-            posts_paths.append(p_path)
-            print(f"[main] YouTube: {len(actors)} actors, {len(posts)} posts")
-        else:
-            print("[main] YouTube: no data returned")
+        for query in queries:
+            print(f"[main] YouTube ingest: query='{query}', channels={max_channels}, videos={max_vids}")
+            actors, posts = ingest_channel_feed(query, max_channels=max_channels, max_videos_per_channel=max_vids)
+            if len(actors) > 0:
+                a_path, p_path = save_bronze(actors, posts, bronze_dir)
+                actors_paths.append(a_path)
+                posts_paths.append(p_path)
+                print(f"[main] YouTube: {len(actors)} actors, {len(posts)} posts")
+            else:
+                print(f"[main] YouTube: no data for query '{query}'")
     except ValueError as e:
         print(f"[main] YouTube skipped: {e}")
     except Exception as e:
